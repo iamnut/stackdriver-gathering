@@ -13,8 +13,6 @@ services:
     image: telegraf:${TELEGRAF_VERSION}
     logging: *default-loggin
     restart: always
-    labels:
-      - "dekd.monitoring.app=stackdriver-gathering"
     environment:
       - TZ=Asia/Bangkok
       - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
