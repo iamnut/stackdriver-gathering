@@ -1,0 +1,34 @@
+[agent]
+  interval = "1m"
+  round_interval = true
+
+  metric_batch_size = 1000
+  metric_buffer_limit = 10000
+
+  collection_jitter = "0s"
+  flush_interval = "1m"
+  flush_jitter = "0s"
+  debug = false
+
+  ## Override default hostname, if empty use os.Hostname()
+  hostname = ""
+  ## If set to true, do no set the "host" tag in the telegraf agent.
+  omit_hostname = true
+
+[[outputs.influxdb]]
+  urls = [ "http://127.0.0.1:8086" ]
+  database = "stackdriver"
+  skip_database_creation = false
+  timeout = "5s"
+
+[[inputs.stackdriver]]
+  project = "example-project-115386"
+  interval = "1m"
+  window = "1m"
+  cache_ttl = "1h"
+
+  metric_type_prefix_include = [
+    "compute.googleapis.com/",
+    "container.googleapis.com/",
+    "storage.googleapis.com/",
+  ]
